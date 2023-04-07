@@ -10,6 +10,10 @@ from . import spawn
 from . import util
 
 
+
+
+
+
 __all__ = ['Popen']
 
 #
@@ -48,6 +52,9 @@ class Popen(popen_fork.Popen):
         finally:
             set_spawning_popen(None)
 
+            
+            
+            
         self.sentinel, w = forkserver.connect_to_new_process(self._fds)
         self.finalizer = util.Finalize(self, os.close, (self.sentinel,))
         with open(w, 'wb', closefd=True) as f:

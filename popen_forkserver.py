@@ -6,9 +6,6 @@ if not reduction.HAVE_SEND_HANDLE:
     raise ImportError('No support for sending fds between processes')
 from . import forkserver
 from . import popen_fork
-
-
-
 from . import spawn
 from . import util
 
@@ -64,9 +61,6 @@ class Popen(popen_fork.Popen):
             try:
                 self.returncode = forkserver.read_signed(self.sentinel)
             except (OSError, EOFError):
-                
-                
-                
                 # This should not happen usually, but perhaps the forkserver
                 # process itself got killed
                 self.returncode = 255

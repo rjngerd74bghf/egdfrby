@@ -6,6 +6,8 @@ if not reduction.HAVE_SEND_HANDLE:
     raise ImportError('No support for sending fds between processes')
 from . import forkserver
 from . import popen_fork
+
+
 from . import spawn
 from . import util
 
@@ -48,6 +50,9 @@ class Popen(popen_fork.Popen):
             set_spawning_popen(None)
         self.sentinel, w = forkserver.connect_to_new_process(self._fds)
         self.finalizer = util.Finalize(self, os.close, (self.sentinel,))
+        
+        
+        
         with open(w, 'wb', closefd=True) as f:
             f.write(buf.getbuffer())
         self.pid = forkserver.read_signed(self.sentinel)

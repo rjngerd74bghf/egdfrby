@@ -1,10 +1,6 @@
 import io
 import os
-
 from .context import reduction, set_spawning_popen
-
-
-
 if not reduction.HAVE_SEND_HANDLE:
     raise ImportError('No support for sending fds between processes')
 from . import forkserver
@@ -15,7 +11,6 @@ __all__ = ['Popen']
 #
 # Wrapper for an fd used while launching a process
 #
-
 class _DupFd(object):
     def __init__(self, ind):
         self.ind = ind
